@@ -1,0 +1,55 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # -----------------------
+    # Backend (.NET)
+    # -----------------------
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore backend dependencies
+      run: dotnet restore ./LiveTriviaBackend
+
+    - name: Build backend
+      run: dotnet build ./LiveTriviaBackend --no-restore --configuration Release
+
+    - name: Test backend
+      run: dotnet test ./LiveTriviaBackend.Tests --no-build --verbosity normal
+
+    # -----------------------
+    # Frontend (React)
+    # -----------------------
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm install
+
+    - name: Build frontend
+      run: |
+        cd frontend
+        npm run build
+
+    - name: Run frontend tests
+      run: |
+        cd frontend
+        npm test -- --watchAll=false
