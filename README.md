@@ -3,7 +3,7 @@
 
 # Live Trivia Game
 
-Live Trivia is a **real-time multiplayer trivia platform** where hosts create quiz rooms and players join from their own devices to answer questions live. The game is designed for synchronized gameplay and supports category voting, real-time answer submission, and live score updates. It can be used for casual play, learning general knowledge, or small competitive events.
+Live Trivia is a **real-time multiplayer trivia platform** where hosts create quiz rooms and players join from their own devices to answer questions live. The game is designed for synchronized gameplay and supports category voting, real-time answer submission, and live score updates. It can be used for casual play, learning general knowledge, or small competitive events...
 
 The backend is built with **C# and ASP.NET Core (.NET 9)** using **SignalR** for real-time communication and **PostgreSQL** for data persistence. The frontend is built with **React (JavaScript)**.
 
